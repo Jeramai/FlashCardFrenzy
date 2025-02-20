@@ -65,12 +65,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     padding: 20,
-    // boxShadow is not a valid style in react-native, use elevation for android
-    elevation: 3, // For Android shadow
-    // For iOS shadow:
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 3
+    boxShadow: '0 0 3px 3px hsla(82, 12.50%, 65.50%, 0.1)'
   }
 });

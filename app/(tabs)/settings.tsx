@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function SettingsScreen() {
   return (
     <View style={styles.background}>
-      <BackButton />
+      <BackButton title='Settings' />
 
       <Text>SETTINGS</Text>
     </View>

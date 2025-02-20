@@ -1,12 +1,18 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-export default function BackButton({ text = undefined }: Readonly<{ text?: string }>) {
+export default function BackButton({ text = undefined, title = undefined }: Readonly<{ text?: string; title?: string }>) {
   return (
-    <Link href='/' style={styles.link} relativeToDirectory>
-      {text ? <Text style={styles.backText}>{text}</Text> : <MaterialIcons name='chevron-left' style={styles.backIcon} />}
-    </Link>
+    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 10, justifyContent: 'space-between' }}>
+      <Link href='/' style={styles.link} relativeToDirectory>
+        {text ? <Text style={styles.backText}>{text}</Text> : <MaterialIcons name='chevron-left' style={styles.backIcon} />}
+      </Link>
+
+      {text ? null : <Text style={styles.backText}>{title}</Text>}
+
+      <MaterialIcons name='chevron-left' style={[styles.backIcon, { visibility: 'hidden' }]} />
+    </View>
   );
 }
 

@@ -77,7 +77,7 @@ export default function CardGroupEdit() {
   return (
     <>
       <View style={styles.background}>
-        <BackButton />
+        <BackButton title='Edit card group' />
 
         <View style={styles.titleWrapper}>
           <Text style={styles.title}>Title: {cardInfo?.name}</Text>

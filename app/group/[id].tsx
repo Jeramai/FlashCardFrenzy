@@ -100,7 +100,7 @@ export default function CardGroupEdit() {
   return (
     <>
       <View style={styles.background}>
-        <BackButton />
+        <BackButton title={cardGroupInfo?.name} />
 
         <View style={styles.stats}>
           <Text style={styles.statsText}>Cards remaining: {remainingCards}</Text>
