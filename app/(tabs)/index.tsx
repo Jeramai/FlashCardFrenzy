@@ -9,7 +9,7 @@ export default function HomeScreen() {
       </View>
       <View>
         <Link href='/game' relativeToDirectory style={styles.gameCard}>
-          <Text>Start a game</Text>
+          <Text>Cards</Text>
         </Link>
       </View>
       {/* <View>

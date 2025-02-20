@@ -20,6 +20,7 @@ interface GameState {
   editCardGroup: (id: CardGroup['id'], name: string) => void;
   removeCardGroup: (id: CardGroup['id']) => void;
   addCard: (groupId: CardGroup['id'], newCard: Card) => void;
+  editCard: (groupId: CardGroup['id'], cardId: Card['id'], front: string, back: string) => void;
   removeCard: (groupId: CardGroup['id'], cardId: Card['id']) => void;
 }
 
@@ -55,6 +56,22 @@ const useGameStore = create<GameState>()(
           cardGroups: get().cardGroups.map((cardGroup) => {
             if (cardGroup.id === groupId) {
               cardGroup.cards = [...cardGroup.cards, newCard];
+            }
+            return cardGroup;
+          })
+        });
+      },
+      editCard: (groupId, cardId, front, back) => {
+        set({
+          cardGroups: get().cardGroups.map((cardGroup) => {
+            if (cardGroup.id === groupId) {
+              cardGroup.cards = cardGroup.cards.map((card) => {
+                if (card.id === cardId) {
+                  card.front = front;
+                  card.back = back;
+                }
+                return card;
+              });
             }
             return cardGroup;
           })

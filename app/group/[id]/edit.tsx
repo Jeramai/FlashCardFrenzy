@@ -1,13 +1,14 @@
 import BackButton from '@/components/ui/BackButton';
 import PopupCard from '@/components/ui/PopupCard';
 import useGameStore from '@/components/useGameStore';
+import { MaterialIcons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
-import { Button, Dimensions, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, Dimensions, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function CardGroupEdit() {
   const { id } = useLocalSearchParams();
-  const { getCardGroup, editCardGroup, addCard } = useGameStore();
+  const { getCardGroup, editCardGroup, addCard, editCard, removeCard } = useGameStore();
 
   const cardInfo = useMemo(() => {
     try {
@@ -48,6 +49,31 @@ export default function CardGroupEdit() {
     setShowPopup(false);
   };
 
+  const [showEditPopup, setShowEditPopup] = useState<any>(false);
+  const onCardClick = (e: any) => {
+    setShowEditPopup(e);
+    setFrontValue(e.front);
+    setBackValue(e.back);
+  };
+  const onEdit = () => {
+    if (!cardInfo || !showEditPopup || !frontValue || !backValue) return;
+
+    editCard(cardInfo.id, showEditPopup.id, frontValue, backValue);
+
+    setShowEditPopup(false);
+    setFrontValue('');
+    setBackValue('');
+  };
+  const onRemove = () => {
+    if (!cardInfo || !showEditPopup) return;
+
+    removeCard(cardInfo.id, showEditPopup.id);
+
+    setShowEditPopup(false);
+    setFrontValue('');
+    setBackValue('');
+  };
+
   return (
     <>
       <View style={styles.background}>
@@ -63,10 +89,10 @@ export default function CardGroupEdit() {
           <ScrollView>
             <View style={styles.cardGroupWrapper}>
               {cardInfo?.cards?.map((card) => (
-                <View key={card.id} style={styles.card}>
+                <TouchableOpacity key={card.id} style={styles.card} onPress={() => onCardClick(card)}>
                   <Text style={styles.cardText}>{card.front}</Text>
                   <Text style={styles.cardText}>{card.back}</Text>
-                </View>
+                </TouchableOpacity>
               ))}
             </View>
           </ScrollView>
@@ -82,6 +108,21 @@ export default function CardGroupEdit() {
           <TextInput style={styles.input} onChangeText={setFrontValue} value={frontValue} placeholder='Front of the card' />
           <TextInput style={styles.input} onChangeText={setBackValue} value={backValue} placeholder='Back of the card' />
           <Button onPress={onCreate} title='CREATE' />
+        </View>
+      </PopupCard>
+
+      <PopupCard show={showEditPopup} onHide={() => setShowEditPopup(false)}>
+        <View style={styles.createPopup}>
+          <View style={styles.titlebar}>
+            <Text style={styles.popupText}>Edit card</Text>
+            <TouchableOpacity style={styles.iconButton} onPress={onRemove}>
+              <MaterialIcons name='delete' size={28} color='black' />
+            </TouchableOpacity>
+          </View>
+
+          <TextInput style={styles.input} onChangeText={setFrontValue} value={frontValue} placeholder='Front of the card' />
+          <TextInput style={styles.input} onChangeText={setBackValue} value={backValue} placeholder='Back of the card' />
+          <Button onPress={onEdit} title='EDIT' />
         </View>
       </PopupCard>
     </>
@@ -144,5 +185,16 @@ const styles = StyleSheet.create({
   newCard: {
     position: 'sticky',
     bottom: 0
+  },
+  titlebar: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  iconButton: {
+    width: 30,
+    height: 30,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
   }
 });
