@@ -78,9 +78,9 @@ export default function GameCard({
   return (
     <Animated.View style={[styles.bigCard, style ?? cardStyle]} {...panResponder.panHandlers}>
       <Text style={[styles.cardText, animated ? {} : styles.blur]}>{currentCard?.[showSide] ?? 'Lorem Ipsum'}</Text>
-      <Text style={[styles.counter, animated ? {} : styles.blur, { top: 20, left: 20, textTransform: 'capitalize' }]}>
+      {/* <Text style={[styles.counter, animated ? {} : styles.blur, { top: 20, left: 20, textTransform: 'capitalize' }]}>
         {showSide}
-      </Text>
+      </Text> */}
       <Text style={[styles.counter, animated ? {} : styles.blur, { left: 20 }]}>Times correct: {timesShown}/5</Text>
       <TouchableOpacity style={[styles.counter, animated ? {} : styles.blur, { right: 20 }]} onPress={flipCard}>
         {showSide === 'front' ? (
