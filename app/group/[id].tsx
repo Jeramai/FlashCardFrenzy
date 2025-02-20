@@ -24,7 +24,7 @@ export default function CardGroupEdit() {
     } catch (error) {
       console.error('Error getting card group:', error);
     }
-  }, [id]);
+  }, [id, getCardGroup]);
 
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const shuffleCards = useCallback((cards: any) => {
@@ -40,9 +40,9 @@ export default function CardGroupEdit() {
     if (!cardGroupInfo) return [];
     const filteredCards = cardGroupInfo.cards.filter((card) => (cardCounts[card.id] || 0) <= 5);
     return shuffleCards(filteredCards);
-  }, [cardGroupInfo, cardCounts]);
+  }, [cardGroupInfo, cardCounts, shuffleCards]);
 
-  const currentCard = useMemo(() => availableCards[currentCardIndex], [currentCardIndex]);
+  const currentCard = useMemo(() => availableCards[currentCardIndex], [availableCards, currentCardIndex]);
 
   const flipCard = () => {
     setShowSide((side) => (side === 'front' ? 'back' : 'front'));

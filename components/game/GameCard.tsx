@@ -15,7 +15,7 @@ export default function GameCard({
   showSide?: 'front' | 'back';
   timesShown?: number;
   animated?: boolean;
-  style?: {};
+  style?: object;
   flipCard?: () => void;
   handleCorrect?: () => void;
   handleWrong?: () => void;

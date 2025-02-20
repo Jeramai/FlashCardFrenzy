@@ -20,7 +20,7 @@ export default function CardGroupEdit() {
     } catch (error) {
       console.error('Error getting card group:', error);
     }
-  }, [id]);
+  }, [id, getCardGroup]);
 
   const [groupName, setGroupName] = useState('');
   useEffect(() => {

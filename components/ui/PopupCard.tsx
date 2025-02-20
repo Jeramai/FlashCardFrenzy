@@ -14,7 +14,7 @@ export default function PopupCard({
       duration: 150, // Adjust duration as needed
       useNativeDriver: true // For better performance
     }).start();
-  }, [show]);
+  }, [show, slideAnim]);
 
   const translateY = slideAnim.interpolate({
     inputRange: [0, 1],

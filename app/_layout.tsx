@@ -17,15 +17,10 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
+    if (loaded) SplashScreen.hideAsync();
   }, [loaded]);
 
-  if (!loaded) {
-    return null;
-  }
-
+  if (!loaded) return null;
   return (
     <ThemeProvider value={DarkTheme}>
       <SafeAreaProvider>
@@ -35,7 +30,7 @@ export default function RootLayout() {
             <Stack.Screen name='+not-found' options={{ headerShown: false }} />
             <Stack.Screen name='group' options={{ headerShown: false }} />
           </Stack>
-          <StatusBar style='auto' backgroundColor='#f3ffe0' />
+          <StatusBar backgroundColor='#f3ffe0' style='dark' />
         </SafeAreaView>
       </SafeAreaProvider>
     </ThemeProvider>
