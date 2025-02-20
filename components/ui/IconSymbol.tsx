@@ -13,12 +13,10 @@ const MAPPING = {
   'paperplane.fill': 'send',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
-} as Partial<
-  Record<
-    import('expo-symbols').SymbolViewProps['name'],
-    React.ComponentProps<typeof MaterialIcons>['name']
-  >
->;
+  'gamecontroller.fill': 'gamepad', // Updated to use .fill variant
+  plus: 'add',
+  'gearshape.fill': 'settings' // Updated to use proper SF Symbol name
+} as Partial<Record<import('expo-symbols').SymbolViewProps['name'], React.ComponentProps<typeof MaterialIcons>['name']>>;
 
 export type IconSymbolName = keyof typeof MAPPING;
 
@@ -31,13 +29,13 @@ export function IconSymbol({
   name,
   size = 24,
   color,
-  style,
-}: {
+  style
+}: Readonly<{
   name: IconSymbolName;
   size?: number;
   color: string | OpaqueColorValue;
   style?: StyleProp<ViewStyle>;
   weight?: SymbolWeight;
-}) {
-  return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />;
+}>) {
+  return <MaterialIcons color={color} size={size} name={MAPPING[name]} />;
 }

@@ -6,26 +6,26 @@ export function IconSymbol({
   size = 24,
   color,
   style,
-  weight = 'regular',
-}: {
+  weight = 'regular'
+}: Readonly<{
   name: SymbolViewProps['name'];
   size?: number;
   color: string;
   style?: StyleProp<ViewStyle>;
   weight?: SymbolWeight;
-}) {
+}>) {
   return (
     <SymbolView
       weight={weight}
       tintColor={color}
-      resizeMode="scaleAspectFit"
+      resizeMode='scaleAspectFit'
       name={name}
       style={[
         {
           width: size,
-          height: size,
+          height: size
         },
-        style,
+        style
       ]}
     />
   );
