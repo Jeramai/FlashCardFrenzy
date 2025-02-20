@@ -94,20 +94,6 @@ export default function GameCard({
 }
 
 const styles = StyleSheet.create({
-  background: {
-    backgroundColor: '#f3ffe0',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
-    paddingTop: 50,
-    paddingBottom: 20,
-    paddingLeft: 20,
-    paddingRight: 20,
-    display: 'flex',
-    gap: 20
-  },
-  bigCardContainer: {
-    position: 'relative'
-  },
   bigCard: {
     backgroundColor: '#ffffff',
     padding: 20,
@@ -116,16 +102,6 @@ const styles = StyleSheet.create({
     boxShadow: '0 0 3px 3px hsla(82, 12.50%, 65.50%, 0.1)',
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  bigCardLeft: {
-    position: 'absolute',
-    transform: 'rotate(3deg)',
-    width: '100%'
-  },
-  bigCardRight: {
-    position: 'absolute',
-    transform: 'rotate(-3deg)',
-    width: '100%'
   },
   cardText: {
     fontSize: 38,
@@ -136,44 +112,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     fontSize: 12,
-    color: '#666'
-  },
-  buttons: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    gap: 10
-  },
-  nextButton: {
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    flex: 1
-  },
-  buttonText: {
-    color: '#ffffff',
-    fontSize: 16,
-    fontWeight: 'bold'
-  },
-  stats: {
-    alignItems: 'center',
-    padding: 5
-  },
-  statsText: {
-    fontSize: 16,
-    color: '#666'
-  },
-  completionContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  completionText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10
-  },
-  completionSubtext: {
-    fontSize: 18,
     color: '#666'
   },
   blur: {

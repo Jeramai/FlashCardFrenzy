@@ -131,15 +131,6 @@ const styles = StyleSheet.create({
   bigCardContainer: {
     position: 'relative'
   },
-  bigCard: {
-    backgroundColor: '#ffffff',
-    padding: 20,
-    height: Dimensions.get('screen').height * 0.7,
-    borderRadius: 15,
-    boxShadow: '0 0 3px 3px hsla(82, 12.50%, 65.50%, 0.1)',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   bigCardLeft: {
     position: 'absolute',
     transform: 'rotate(3deg)',
@@ -149,17 +140,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     transform: 'rotate(-3deg)',
     width: '100%'
-  },
-  cardText: {
-    fontSize: 38,
-    fontWeight: 600,
-    color: 'gray'
-  },
-  counter: {
-    position: 'absolute',
-    bottom: 20,
-    fontSize: 12,
-    color: '#666'
   },
   buttons: {
     justifyContent: 'space-between',
