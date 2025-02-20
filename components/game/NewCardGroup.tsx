@@ -44,7 +44,11 @@ const styles = StyleSheet.create({
     position: 'sticky',
     bottom: 10
   },
-  newCardsCardText: { color: 'white' },
+  newCardsCardText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 600
+  },
   createPopup: {
     display: 'flex',
     gap: 15

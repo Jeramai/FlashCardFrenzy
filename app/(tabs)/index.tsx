@@ -9,7 +9,7 @@ export default function HomeScreen() {
       </View>
       <View>
         <Link href='/game' relativeToDirectory style={styles.gameCard}>
-          <Text>Cards</Text>
+          <Text style={styles.gameCardText}>Cards</Text>
         </Link>
       </View>
       {/* <View>
@@ -48,7 +48,15 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 100,
     borderRadius: 15,
-    boxShadow: '0 0 3px 3px hsla(82, 12.50%, 65.50%, 0.1)'
+    boxShadow: '0 0 3px 3px hsla(82, 12.50%, 65.50%, 0.1)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  gameCardText: {
+    fontSize: 20,
+    fontWeight: 600,
+    color: 'gray'
   },
   newCardsCard: {
     backgroundColor: '#449e79',
@@ -59,7 +67,7 @@ const styles = StyleSheet.create({
   },
   newCardsCardText: { color: 'white' },
   settingsCard: {
-    backgroundColor: '#c2ccb3',
+    backgroundColor: '#449e79',
     padding: 10,
     height: 50,
     borderRadius: 15,
@@ -67,7 +75,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignContent: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  settingsCardText: {}
+  settingsCardText: {
+    fontSize: 20,
+    fontWeight: 600,
+    color: 'white'
+  }
 });

@@ -90,25 +90,31 @@ export default function CardGroupEdit() {
         <Text style={styles.statsText}>Cards remaining: {remainingCards}</Text>
       </View>
 
-      <View style={styles.bigCard}>
-        <Text style={styles.cardText}>{currentCard?.[showSide]}</Text>
-        <Text style={[styles.counter, { left: 20 }]}>Times correct: {timesShown}/5</Text>
-        <TouchableOpacity style={[styles.counter, { right: 20 }]} onPress={flipCard}>
-          {showSide === 'front' ? (
-            <MaterialIcons name='flip-to-front' size={24} color='black' />
-          ) : (
-            <MaterialIcons name='flip-to-back' size={24} color='black' />
-          )}
-        </TouchableOpacity>
-      </View>
+      <View style={{ display: 'flex', justifyContent: 'space-around', flex: 1 }}>
+        <View style={styles.bigCardContainer}>
+          {remainingCards > 1 && <View style={[styles.bigCard, styles.bigCardLeft]} />}
+          {remainingCards > 2 && <View style={[styles.bigCard, styles.bigCardRight]} />}
+          <View style={styles.bigCard}>
+            <Text style={styles.cardText}>{currentCard?.[showSide]}</Text>
+            <Text style={[styles.counter, { left: 20 }]}>Times correct: {timesShown}/5</Text>
+            <TouchableOpacity style={[styles.counter, { right: 20 }]} onPress={flipCard}>
+              {showSide === 'front' ? (
+                <MaterialIcons name='flip-to-front' size={24} color='black' />
+              ) : (
+                <MaterialIcons name='flip-to-back' size={24} color='black' />
+              )}
+            </TouchableOpacity>
+          </View>
+        </View>
 
-      <View style={styles.buttons}>
-        <TouchableOpacity style={[styles.nextButton, { backgroundColor: '#e05d5d' }]} onPress={handleWrong}>
-          <Text style={styles.buttonText}>Wrong</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.nextButton, { backgroundColor: '#4CAF50' }]} onPress={handleCorrect}>
-          <Text style={styles.buttonText}>Correct</Text>
-        </TouchableOpacity>
+        <View style={styles.buttons}>
+          <TouchableOpacity style={[styles.nextButton, { backgroundColor: '#e05d5d' }]} onPress={handleWrong}>
+            <Text style={styles.buttonText}>Wrong</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.nextButton, { backgroundColor: '#4CAF50' }]} onPress={handleCorrect}>
+            <Text style={styles.buttonText}>Correct</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -126,6 +132,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     gap: 20
   },
+  bigCardContainer: {
+    position: 'relative'
+  },
   bigCard: {
     backgroundColor: '#ffffff',
     padding: 20,
@@ -134,6 +143,16 @@ const styles = StyleSheet.create({
     boxShadow: '0 0 3px 3px hsla(82, 12.50%, 65.50%, 0.1)',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  bigCardLeft: {
+    position: 'absolute',
+    transform: 'rotate(3deg)',
+    width: '100%'
+  },
+  bigCardRight: {
+    position: 'absolute',
+    transform: 'rotate(-3deg)',
+    width: '100%'
   },
   cardText: {
     fontSize: 38,
