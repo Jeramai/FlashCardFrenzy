@@ -82,7 +82,7 @@ export default function CardGroupEdit() {
         <View style={styles.titleWrapper}>
           <Text style={styles.title}>Title: {cardInfo?.name}</Text>
           <TextInput style={styles.input} onChangeText={setGroupName} value={groupName} placeholder='Card group name' />
-          <Button onPress={onUpdate} title='UPDATE' />
+          <Button onPress={onUpdate} title='UPDATE TITLE' />
         </View>
         <View style={{ flex: 1, gap: 10 }}>
           <Text style={styles.title}>Cards ({cardInfo?.cards?.length}):</Text>
