@@ -4,7 +4,7 @@ import BackButton from '@/components/ui/BackButton';
 import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics';
 import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function CardGroupEdit() {
   const { id } = useLocalSearchParams();
@@ -52,7 +52,10 @@ export default function CardGroupEdit() {
     setShowSide('front');
     // Move to next card
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % availableCards.length);
-    impactAsync(ImpactFeedbackStyle.Rigid);
+
+    if (Platform.OS === 'android' || Platform.OS === 'ios') {
+      impactAsync(ImpactFeedbackStyle.Rigid);
+    }
   };
   const handleCorrect = () => {
     if (!currentCard) return;
@@ -64,14 +67,17 @@ export default function CardGroupEdit() {
     }));
     // Move to next card
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % availableCards.length);
-    impactAsync(ImpactFeedbackStyle.Soft);
+
+    if (Platform.OS === 'android' || Platform.OS === 'ios') {
+      impactAsync(ImpactFeedbackStyle.Soft);
+    }
   };
 
   // Show completion message when all cards have been shown 5 times
   if (!availableCards.length) {
     return (
       <View style={styles.background}>
-        <BackButton text='< Back to home' />
+        <BackButton />
         <View style={styles.completionContainer}>
           <Text style={styles.completionText}>Congratulations! 🎉</Text>
           <Text style={styles.completionSubtext}>You've completed all cards 5 times!</Text>
@@ -85,7 +91,7 @@ export default function CardGroupEdit() {
 
   return (
     <View style={styles.background}>
-      <BackButton text='< Back to home' />
+      <BackButton />
 
       <View style={styles.stats}>
         <Text style={styles.statsText}>Cards remaining: {remainingCards}</Text>

@@ -4,7 +4,7 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native';
 export default function SettingsScreen() {
   return (
     <View style={styles.background}>
-      <BackButton text='< Back to home' />
+      <BackButton />
 
       <Text>SETTINGS</Text>
     </View>

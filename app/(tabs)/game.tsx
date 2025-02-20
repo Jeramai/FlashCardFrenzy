@@ -9,7 +9,7 @@ export default function GameScreen() {
 
   return (
     <View style={styles.background}>
-      <BackButton text='< Back to home' />
+      <BackButton />
 
       {!cardGroups ? (
         <Text style={styles.card}>Loading..</Text>
