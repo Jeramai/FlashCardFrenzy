@@ -1,7 +1,7 @@
+import useGameStore from '@/components/context/useGameStore';
 import CardsOverview from '@/components/game/CardsOverview';
 import NewCardGroup from '@/components/game/NewCardGroup';
 import BackButton from '@/components/ui/BackButton';
-import useGameStore from '@/components/useGameStore';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 
 export default function GameScreen() {

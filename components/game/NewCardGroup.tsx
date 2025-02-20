@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import useGameStore from '../context/useGameStore';
 import PopupCard from '../ui/PopupCard';
-import useGameStore from '../useGameStore';
 
 export default function NewCardGroup() {
   const { addCardGroup } = useGameStore();

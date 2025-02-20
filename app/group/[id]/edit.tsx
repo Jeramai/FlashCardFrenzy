@@ -1,6 +1,6 @@
+import useGameStore from '@/components/context/useGameStore';
 import BackButton from '@/components/ui/BackButton';
 import PopupCard from '@/components/ui/PopupCard';
-import useGameStore from '@/components/useGameStore';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';

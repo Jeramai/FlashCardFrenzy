@@ -1,9 +1,10 @@
+import useGameStore from '@/components/context/useGameStore';
 import GameCard from '@/components/game/GameCard';
 import BackButton from '@/components/ui/BackButton';
-import useGameStore from '@/components/useGameStore';
+import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics';
 import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, Vibration, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function CardGroupEdit() {
   const { id } = useLocalSearchParams();
@@ -51,7 +52,7 @@ export default function CardGroupEdit() {
     setShowSide('front');
     // Move to next card
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % availableCards.length);
-    Vibration.vibrate([0, 100]);
+    impactAsync(ImpactFeedbackStyle.Rigid);
   };
   const handleCorrect = () => {
     if (!currentCard) return;
@@ -63,7 +64,7 @@ export default function CardGroupEdit() {
     }));
     // Move to next card
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % availableCards.length);
-    Vibration.vibrate([0, 100, 300]);
+    impactAsync(ImpactFeedbackStyle.Soft);
   };
 
   // Show completion message when all cards have been shown 5 times

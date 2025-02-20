@@ -2,8 +2,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import useGameStore from '../context/useGameStore';
 import PopupCard from '../ui/PopupCard';
-import useGameStore from '../useGameStore';
 
 export default function CardsOverview() {
   const { cardGroups, removeCardGroup } = useGameStore();
