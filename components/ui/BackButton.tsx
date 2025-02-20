@@ -11,7 +11,7 @@ export default function BackButton({ text = undefined, title = undefined }: Read
 
       {text ? null : <Text style={styles.backText}>{title}</Text>}
 
-      <MaterialIcons name='chevron-left' style={[styles.backIcon, { visibility: 'hidden' }]} />
+      <MaterialIcons name='chevron-left' style={styles.backIcon} color='transparent' />
     </View>
   );
 }
