@@ -1,5 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 // Define proper interfaces for better type safety
 interface CardGroup {
@@ -23,6 +24,12 @@ interface GameState {
   editCard: (groupId: CardGroup['id'], cardId: Card['id'], front: string, back: string) => void;
   removeCard: (groupId: CardGroup['id'], cardId: Card['id']) => void;
 }
+
+const asyncStoragePersistConfig = {
+  setItem: async (key: string, value: string) => await AsyncStorage.setItem(key, value),
+  getItem: async (key: string) => await AsyncStorage.getItem(key),
+  removeItem: async (key: string) => await AsyncStorage.removeItem(key)
+};
 
 const useGameStore = create<GameState>()(
   persist(
@@ -89,7 +96,8 @@ const useGameStore = create<GameState>()(
       }
     }),
     {
-      name: 'cards'
+      name: 'cards',
+      storage: createJSONStorage(() => asyncStoragePersistConfig)
     }
   )
 );

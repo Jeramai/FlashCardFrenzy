@@ -4,7 +4,7 @@ import PopupCard from '@/components/ui/PopupCard';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
-import { Button, Dimensions, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Button, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function CardGroupEdit() {
   const { id } = useLocalSearchParams();
@@ -132,9 +132,9 @@ export default function CardGroupEdit() {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: '#f3ffe0',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
-    paddingTop: 50,
+    height: '100%',
+    width: '100%',
+    paddingTop: 20,
     paddingBottom: 20,
     paddingLeft: 20,
     paddingRight: 20,

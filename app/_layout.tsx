@@ -35,7 +35,7 @@ export default function RootLayout() {
             <Stack.Screen name='+not-found' options={{ headerShown: false }} />
             <Stack.Screen name='group' options={{ headerShown: false }} />
           </Stack>
-          <StatusBar style='auto' />
+          <StatusBar style='auto' backgroundColor='#f3ffe0' />
         </SafeAreaView>
       </SafeAreaProvider>
     </ThemeProvider>

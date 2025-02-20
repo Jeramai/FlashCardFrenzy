@@ -1,5 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { Animated, Dimensions, PanResponder, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Animated, Dimensions, PanResponder, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function GameCard({
   currentCard = {},
@@ -26,15 +26,19 @@ export default function GameCard({
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onPanResponderMove: (event, gesture) => {
+      if (!animated) return;
+
       position.setValue({ x: gesture.dx, y: 0 });
     },
     onPanResponderRelease: (event, gesture) => {
+      if (!animated) return;
+
       if (gesture.dx > swipeThreshold) {
         // Swipe right - correct
         Animated.timing(position, {
           toValue: { x: 500, y: 0 },
           duration: 200,
-          useNativeDriver: false
+          useNativeDriver: true
         }).start(() => {
           handleCorrect();
           position.setValue({ x: 0, y: 0 });
@@ -44,7 +48,7 @@ export default function GameCard({
         Animated.timing(position, {
           toValue: { x: -500, y: 0 },
           duration: 200,
-          useNativeDriver: false
+          useNativeDriver: true
         }).start(() => {
           handleWrong();
           position.setValue({ x: 0, y: 0 });
@@ -53,7 +57,7 @@ export default function GameCard({
         // Reset position if not swiped far enough
         Animated.spring(position, {
           toValue: { x: 0, y: 0 },
-          useNativeDriver: false
+          useNativeDriver: true
         }).start();
       }
     }
@@ -75,7 +79,7 @@ export default function GameCard({
     ]
   };
 
-  return (
+  return animated ? (
     <Animated.View style={[styles.bigCard, style ?? cardStyle]} {...panResponder.panHandlers}>
       <Text style={[styles.cardText, animated ? {} : styles.blur]}>{currentCard?.[showSide] ?? 'Lorem Ipsum'}</Text>
       {/* <Text style={[styles.counter, animated ? {} : styles.blur, { top: 20, left: 20, textTransform: 'capitalize' }]}>
@@ -90,6 +94,14 @@ export default function GameCard({
         )}
       </TouchableOpacity>
     </Animated.View>
+  ) : (
+    <View style={[styles.bigCard, style ?? cardStyle]}>
+      <Text style={[styles.cardText, styles.blur]}>Lorem Ipsum</Text>
+      <Text style={[styles.counter, styles.blur, { left: 20 }]}>Times correct: 0/5</Text>
+      <TouchableOpacity style={[styles.counter, styles.blur, { right: 20 }]} onPress={flipCard}>
+        <MaterialIcons name='flip-to-back' size={24} color='black' />
+      </TouchableOpacity>
+    </View>
   );
 }
 
@@ -97,7 +109,7 @@ const styles = StyleSheet.create({
   bigCard: {
     backgroundColor: '#ffffff',
     padding: 20,
-    height: Dimensions.get('screen').height * 0.7,
+    height: Dimensions.get('screen').height * 0.6,
     borderRadius: 15,
     boxShadow: '0 0 3px 3px hsla(82, 12.50%, 65.50%, 0.1)',
     justifyContent: 'center',

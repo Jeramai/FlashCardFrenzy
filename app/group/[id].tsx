@@ -1,10 +1,11 @@
 import useGameStore from '@/components/context/useGameStore';
 import GameCard from '@/components/game/GameCard';
+import ShakeDetector from '@/components/game/ShakeDetector';
 import BackButton from '@/components/ui/BackButton';
 import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics';
 import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { Dimensions, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function CardGroupEdit() {
   const { id } = useLocalSearchParams();
@@ -72,6 +73,13 @@ export default function CardGroupEdit() {
       impactAsync(ImpactFeedbackStyle.Soft);
     }
   };
+  const onShake = () => {
+    if (!currentCard) return;
+
+    setShowSide('front');
+    // Move to next card
+    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % availableCards.length);
+  };
 
   // Show completion message when all cards have been shown 5 times
   if (!availableCards.length) {
@@ -90,47 +98,51 @@ export default function CardGroupEdit() {
   const remainingCards = availableCards.length;
 
   return (
-    <View style={styles.background}>
-      <BackButton />
+    <>
+      <View style={styles.background}>
+        <BackButton />
 
-      <View style={styles.stats}>
-        <Text style={styles.statsText}>Cards remaining: {remainingCards}</Text>
-      </View>
-
-      <View style={{ display: 'flex', justifyContent: 'space-around', flex: 1 }}>
-        <View style={styles.bigCardContainer}>
-          {remainingCards > 1 && <GameCard animated={false} style={styles.bigCardLeft} />}
-          {remainingCards > 2 && <GameCard animated={false} style={styles.bigCardRight} />}
-          <GameCard
-            currentCard={currentCard}
-            showSide={showSide}
-            timesShown={timesShown}
-            flipCard={flipCard}
-            handleCorrect={handleCorrect}
-            handleWrong={handleWrong}
-            animated
-          />
+        <View style={styles.stats}>
+          <Text style={styles.statsText}>Cards remaining: {remainingCards}</Text>
         </View>
 
-        <View style={styles.buttons}>
-          <TouchableOpacity style={[styles.nextButton, { backgroundColor: '#e05d5d' }]} onPress={handleWrong}>
-            <Text style={styles.buttonText}>Wrong</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.nextButton, { backgroundColor: '#4CAF50' }]} onPress={handleCorrect}>
-            <Text style={styles.buttonText}>Correct</Text>
-          </TouchableOpacity>
+        <View style={{ display: 'flex', justifyContent: 'space-around', flex: 1, gap: 20 }}>
+          <View style={styles.bigCardContainer}>
+            {remainingCards > 1 && <GameCard animated={false} style={styles.bigCardLeft} />}
+            {remainingCards > 2 && <GameCard animated={false} style={styles.bigCardRight} />}
+            <GameCard
+              currentCard={currentCard}
+              showSide={showSide}
+              timesShown={timesShown}
+              flipCard={flipCard}
+              handleCorrect={handleCorrect}
+              handleWrong={handleWrong}
+              animated
+            />
+          </View>
+
+          <View style={styles.buttons}>
+            <TouchableOpacity style={[styles.nextButton, { backgroundColor: '#e05d5d' }]} onPress={handleWrong}>
+              <Text style={styles.buttonText}>Wrong</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.nextButton, { backgroundColor: '#4CAF50' }]} onPress={handleCorrect}>
+              <Text style={styles.buttonText}>Correct</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+
+      <ShakeDetector onShake={onShake} />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   background: {
     backgroundColor: '#f3ffe0',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
-    paddingTop: 50,
+    height: '100%',
+    width: '100%',
+    paddingTop: 20,
     paddingBottom: 20,
     paddingLeft: 20,
     paddingRight: 20,
