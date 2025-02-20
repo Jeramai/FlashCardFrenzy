@@ -1,6 +1,6 @@
+import GameCard from '@/components/game/GameCard';
 import BackButton from '@/components/ui/BackButton';
 import useGameStore from '@/components/useGameStore';
-import { MaterialIcons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -40,9 +40,7 @@ export default function CardGroupEdit() {
     return shuffleCards(filteredCards);
   }, [cardGroupInfo, cardCounts]);
 
-  const currentCard = useMemo(() => {
-    return availableCards[currentCardIndex];
-  }, [currentCardIndex]);
+  const currentCard = useMemo(() => availableCards[currentCardIndex], [currentCardIndex]);
 
   const flipCard = () => {
     setShowSide((side) => (side === 'front' ? 'back' : 'front'));
@@ -92,19 +90,17 @@ export default function CardGroupEdit() {
 
       <View style={{ display: 'flex', justifyContent: 'space-around', flex: 1 }}>
         <View style={styles.bigCardContainer}>
-          {remainingCards > 1 && <View style={[styles.bigCard, styles.bigCardLeft]} />}
-          {remainingCards > 2 && <View style={[styles.bigCard, styles.bigCardRight]} />}
-          <View style={styles.bigCard}>
-            <Text style={styles.cardText}>{currentCard?.[showSide]}</Text>
-            <Text style={[styles.counter, { left: 20 }]}>Times correct: {timesShown}/5</Text>
-            <TouchableOpacity style={[styles.counter, { right: 20 }]} onPress={flipCard}>
-              {showSide === 'front' ? (
-                <MaterialIcons name='flip-to-front' size={24} color='black' />
-              ) : (
-                <MaterialIcons name='flip-to-back' size={24} color='black' />
-              )}
-            </TouchableOpacity>
-          </View>
+          {remainingCards > 1 && <GameCard animated={false} style={styles.bigCardLeft} />}
+          {remainingCards > 2 && <GameCard animated={false} style={styles.bigCardRight} />}
+          <GameCard
+            currentCard={currentCard}
+            showSide={showSide}
+            timesShown={timesShown}
+            flipCard={flipCard}
+            handleCorrect={handleCorrect}
+            handleWrong={handleWrong}
+            animated
+          />
         </View>
 
         <View style={styles.buttons}>
