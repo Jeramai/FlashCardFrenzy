@@ -9,7 +9,8 @@ interface CardGroup {
 }
 interface Card {
   id: number;
-  name: string;
+  front: string;
+  back: string;
 }
 
 interface GameState {
