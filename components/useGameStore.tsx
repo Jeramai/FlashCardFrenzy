@@ -14,7 +14,9 @@ interface Card {
 
 interface GameState {
   cardGroups: CardGroup[];
+  getCardGroup: (id: CardGroup['id']) => CardGroup | undefined;
   addCardGroup: (newCardGroup: CardGroup) => void;
+  editCardGroup: (id: CardGroup['id'], name: string) => void;
   removeCardGroup: (id: CardGroup['id']) => void;
   addCard: (groupId: CardGroup['id'], newCard: Card) => void;
   removeCard: (groupId: CardGroup['id'], cardId: Card['id']) => void;
@@ -24,9 +26,22 @@ const useGameStore = create<GameState>()(
   persist(
     (set, get) => ({
       cardGroups: [],
+      getCardGroup: (id) => {
+        return get().cardGroups?.find((cardGroup) => cardGroup.id === id);
+      },
       addCardGroup: (newCardGroup) => {
         set({
           cardGroups: [...get().cardGroups, newCardGroup]
+        });
+      },
+      editCardGroup: (id, name) => {
+        set({
+          cardGroups: get().cardGroups.map((card) => {
+            if (card.id === id) {
+              card.name = name;
+            }
+            return card;
+          })
         });
       },
       removeCardGroup: (id) => {

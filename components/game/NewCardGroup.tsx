@@ -22,6 +22,7 @@ export default function NewCardGroup() {
 
       <PopupCard show={showPopup} onHide={() => setShowPopup(false)}>
         <View style={styles.createPopup}>
+          <Text style={styles.popupText}>Create a new card group</Text>
           <TextInput style={styles.input} onChangeText={setGroupName} value={groupName} placeholder='Card group name' />
           <Button onPress={onCreate} title='CREATE' />
         </View>
@@ -47,6 +48,10 @@ const styles = StyleSheet.create({
   createPopup: {
     display: 'flex',
     gap: 15
+  },
+  popupText: {
+    fontSize: 20,
+    fontWeight: 600
   },
   input: {
     height: 40,

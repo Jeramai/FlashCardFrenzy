@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     left: 15,
     right: 15,
     zIndex: 101,
-    height: Dimensions.get('screen').height * 0.85,
+    maxHeight: Dimensions.get('screen').height * 0.85,
     backgroundColor: 'white',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
