@@ -1,7 +1,7 @@
 import useGameStore from '@/components/context/useGameStore';
 import BackButton from '@/components/ui/BackButton';
 import PopupCard from '@/components/ui/PopupCard';
-import { MaterialIcons } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
 import { Button, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
