@@ -1,5 +1,5 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { Animated, Dimensions, PanResponder, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, PanResponder, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function GameCard({
   currentCard = {},
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   bigCard: {
     backgroundColor: '#ffffff',
     padding: 20,
-    height: Dimensions.get('screen').height * 0.6,
+    height: '60%',
     borderRadius: 15,
     boxShadow: '0 0 3px 3px hsla(82, 12.50%, 65.50%, 0.1)',
     justifyContent: 'center',

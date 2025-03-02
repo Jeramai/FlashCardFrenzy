@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
+import { Animated, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default function PopupCard({
   show,
@@ -18,7 +18,7 @@ export default function PopupCard({
 
   const translateY = slideAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: [Dimensions.get('screen').height * 0.85, 0] // Slide from bottom
+    outputRange: ['85%', '0%'] // Slide from bottom
   });
 
   return (
