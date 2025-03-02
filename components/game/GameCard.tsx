@@ -115,13 +115,15 @@ const styles = StyleSheet.create({
   cardText: {
     fontSize: 38,
     fontWeight: 600,
-    color: 'gray'
+    color: 'gray',
+    userSelect: 'none'
   },
   counter: {
     position: 'absolute',
     bottom: 20,
     fontSize: 12,
-    color: '#666'
+    color: '#666',
+    userSelect: 'none'
   },
   blur: {
     filter: 'blur(7px)'
