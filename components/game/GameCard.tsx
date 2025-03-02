@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   bigCard: {
     backgroundColor: '#ffffff',
     padding: 20,
-    height: '60%',
+    height: '100%',
     borderRadius: 15,
     boxShadow: '0 0 3px 3px hsla(82, 12.50%, 65.50%, 0.1)',
     justifyContent: 'center',

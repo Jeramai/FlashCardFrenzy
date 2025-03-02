@@ -153,7 +153,10 @@ const styles = StyleSheet.create({
     gap: 20
   },
   bigCardContainer: {
-    position: 'relative'
+    position: 'relative',
+    height: '60%',
+    display: 'flex',
+    justifyContent: 'center'
   },
   bigCardLeft: {
     position: 'absolute',
