@@ -46,7 +46,7 @@ export default function PopupCard({
 
 const styles = StyleSheet.create({
   popupCardBackground: {
-    position: 'absolute', // Changed to absolute
+    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     zIndex: 100
   },
   popupCard: {
-    position: 'absolute', // Changed to absolute
+    position: 'absolute',
     bottom: 0,
     left: 15,
     right: 15,
