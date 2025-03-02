@@ -1,4 +1,5 @@
 {
+  "id": "flashcardfrenzy.jeram.ai",
   "name": "FlashCardFrenzy",
   "short_name": "FlashCardFrenzy",
   "description": "FlashCardFrenzy is a fun and interactive app that helps users learn new words and phrases through flashcards. With FlashCardFrenzy, you can create your own flashcards, study with spaced repetition, and track your progress. Whether you're a language enthusiast or just looking to improve your vocabulary, FlashCardFrenzy is the perfect tool for you!",
@@ -22,5 +23,6 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#449e79",
-  "background_color": "#f3ffe0"
+  "background_color": "#f3ffe0",
+  "orientation": "portrait-primary"
 }
