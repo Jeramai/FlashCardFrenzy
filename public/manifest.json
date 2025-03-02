@@ -1,0 +1,26 @@
+{
+  "name": "FlashCardFrenzy",
+  "short_name": "FlashCardFrenzy",
+  "description": "FlashCardFrenzy is a fun and interactive app that helps users learn new words and phrases through flashcards. With FlashCardFrenzy, you can create your own flashcards, study with spaced repetition, and track your progress. Whether you're a language enthusiast or just looking to improve your vocabulary, FlashCardFrenzy is the perfect tool for you!",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#449e79",
+  "background_color": "#f3ffe0"
+}
