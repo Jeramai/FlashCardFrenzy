@@ -1,11 +1,17 @@
+import Head from 'expo-router/head';
 import { ScrollViewStyleReset } from 'expo-router/html';
 import { type PropsWithChildren } from 'react';
+import { Platform } from 'react-native';
 
 export default function Root({ children }: Readonly<PropsWithChildren>) {
   return (
     <html lang='en'>
+      {Platform.OS === 'web' && (
+        <Head>
+          <title>FlashCardFrenzy</title>
+        </Head>
+      )}
       <head>
-        <title>FlashCardFrenzy</title>
         <meta
           name='description'
           content="FlashCardFrenzy is a fun and interactive app that helps users learn new words and phrases through flashcards. With FlashCardFrenzy, you can create your own flashcards, study with spaced repetition, and track your progress. Whether you're a language enthusiast or just looking to improve your vocabulary, FlashCardFrenzy is the perfect tool for you!"
@@ -20,6 +26,7 @@ export default function Root({ children }: Readonly<PropsWithChildren>) {
 
         <ScrollViewStyleReset />
       </head>
+
       <body style={{ backgroundColor: '#f3ffe0' }}>{children}</body>
     </html>
   );
