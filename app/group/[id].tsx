@@ -22,7 +22,10 @@ export default function CardGroupEdit() {
       }
       return getCardGroup(numericId);
     } catch (error) {
-      console.error('Error getting card group:', error);
+      if (id != '[id]') {
+        console.error('Error getting card group:', error);
+        console.error('ID:', id);
+      }
     }
   }, [id, getCardGroup]);
 
