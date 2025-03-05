@@ -4,18 +4,7 @@
     <meta charset="utf-8" />
     <title>Redirecting...</title>
     <script>
-      // Get the current path
-      const path = window.location.pathname;
-      // Get the current search params
-      const searchParams = window.location.search;
-      // Get the current hash
-      const hash = window.location.hash;
-
-      // Construct the redirect URL preserving the path and query parameters
-      const redirectUrl = '/' + (path ? path.replace(/^\//, '') : '');
-
-      // Redirect to the index page while maintaining the URL
-      window.location.replace(redirectUrl);
+      window.location.replace('/');
     </script>
   </head>
   <body></body>
