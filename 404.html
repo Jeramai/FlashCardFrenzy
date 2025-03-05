@@ -12,7 +12,7 @@
       const hash = window.location.hash;
 
       // Construct the redirect URL preserving the path and query parameters
-      const redirectUrl = '/' + (path ? path.replace(/^\//, '') : '') + searchParams + hash;
+      const redirectUrl = '/' + (path ? path.replace(/^\//, '') : '');
 
       // Redirect to the index page while maintaining the URL
       window.location.replace(redirectUrl);
