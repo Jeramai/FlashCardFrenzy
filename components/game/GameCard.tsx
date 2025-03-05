@@ -7,28 +7,28 @@ export default function GameCard({
   showSide = 'front',
   timesShown = 0,
   flipCard = () => {},
-  handleCorrect = () => {},
-  handleWrong = () => {},
+  swipeLeft = () => {},
+  swipeRight = () => {},
   animated = true,
-  style = undefined
+  style = undefined,
+  position = new Animated.ValueXY()
 }: Readonly<{
   currentCard?: any;
   showSide?: 'front' | 'back';
   timesShown?: number;
   animated?: boolean;
   style?: object;
+  position?: Animated.ValueXY;
   flipCard?: () => void;
-  handleCorrect?: () => void;
-  handleWrong?: () => void;
+  swipeLeft?: () => void;
+  swipeRight?: () => void;
 }>) {
-  // SWIPE
-  const position = new Animated.ValueXY();
-  const swipeThreshold = 120;
-
   // Create a double tap handler function
   const DOUBLE_TAP_DELAY = 300;
   const [lastTap, setLastTap] = useState(0);
   const handleDoubleTap = () => {
+    if (!animated) return;
+
     const now = Date.now();
     if (now - lastTap < DOUBLE_TAP_DELAY) {
       handleFlip();
@@ -36,6 +36,8 @@ export default function GameCard({
     setLastTap(now);
   };
 
+  // SWIPE
+  const swipeThreshold = 120;
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onPanResponderMove: (event, gesture) => {
@@ -47,25 +49,9 @@ export default function GameCard({
       if (!animated) return;
 
       if (gesture.dx > swipeThreshold) {
-        // Swipe right - correct
-        Animated.timing(position, {
-          toValue: { x: 500, y: 0 },
-          duration: 200,
-          useNativeDriver: true
-        }).start(() => {
-          handleCorrect();
-          position.setValue({ x: 0, y: 0 });
-        });
+        swipeRight();
       } else if (gesture.dx < -swipeThreshold) {
-        // Swipe left - wrong
-        Animated.timing(position, {
-          toValue: { x: -500, y: 0 },
-          duration: 200,
-          useNativeDriver: true
-        }).start(() => {
-          handleWrong();
-          position.setValue({ x: 0, y: 0 });
-        });
+        swipeLeft();
       } else {
         // Reset position if not swiped far enough
         Animated.spring(position, {

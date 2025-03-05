@@ -5,7 +5,7 @@ import BackButton from '@/components/ui/BackButton';
 import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics';
 import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function CardGroupEdit() {
   const { id } = useLocalSearchParams();
@@ -48,34 +48,51 @@ export default function CardGroupEdit() {
   const currentCard = useMemo(() => availableCards[currentCardIndex], [availableCards, currentCardIndex]);
 
   const flipCard = () => {
-    console.log('ahihi');
     setShowSide((side) => (side === 'front' ? 'back' : 'front'));
   };
-  const handleWrong = () => {
-    if (!currentCard) return;
 
-    setShowSide('front');
-    // Move to next card
-    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % availableCards.length);
+  const position = new Animated.ValueXY();
+  const swipeLeft = () => {
+    Animated.timing(position, {
+      toValue: { x: -500, y: 0 },
+      duration: 200,
+      useNativeDriver: true
+    }).start(() => {
+      if (!currentCard) return;
 
-    if (Platform.OS === 'android' || Platform.OS === 'ios') {
-      impactAsync(ImpactFeedbackStyle.Rigid);
-    }
+      setShowSide('front');
+      // Move to next card
+      setCurrentCardIndex((prevIndex) => (prevIndex + 1) % availableCards.length);
+
+      if (Platform.OS === 'android' || Platform.OS === 'ios') {
+        impactAsync(ImpactFeedbackStyle.Rigid);
+      }
+
+      position.setValue({ x: 0, y: 0 });
+    });
   };
-  const handleCorrect = () => {
-    if (!currentCard) return;
+  const swipeRight = () => {
+    Animated.timing(position, {
+      toValue: { x: 500, y: 0 },
+      duration: 200,
+      useNativeDriver: true
+    }).start(() => {
+      if (!currentCard) return;
 
-    setShowSide('front');
-    setCardCounts((prevCounts) => ({
-      ...prevCounts,
-      [currentCard.id]: (prevCounts[currentCard.id] || 0) + 1
-    }));
-    // Move to next card
-    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % availableCards.length);
+      setShowSide('front');
+      setCardCounts((prevCounts) => ({
+        ...prevCounts,
+        [currentCard.id]: (prevCounts[currentCard.id] || 0) + 1
+      }));
+      // Move to next card
+      setCurrentCardIndex((prevIndex) => (prevIndex + 1) % availableCards.length);
 
-    if (Platform.OS === 'android' || Platform.OS === 'ios') {
-      impactAsync(ImpactFeedbackStyle.Soft);
-    }
+      if (Platform.OS === 'android' || Platform.OS === 'ios') {
+        impactAsync(ImpactFeedbackStyle.Soft);
+      }
+
+      position.setValue({ x: 0, y: 0 });
+    });
   };
   const onShake = () => {
     if (!currentCard) return;
@@ -119,17 +136,18 @@ export default function CardGroupEdit() {
               showSide={showSide}
               timesShown={timesShown}
               flipCard={flipCard}
-              handleCorrect={handleCorrect}
-              handleWrong={handleWrong}
+              position={position}
+              swipeLeft={swipeLeft}
+              swipeRight={swipeRight}
               animated
             />
           </View>
 
           <View style={styles.buttons}>
-            <TouchableOpacity style={[styles.nextButton, { backgroundColor: '#e05d5d' }]} onPress={handleWrong}>
+            <TouchableOpacity style={[styles.nextButton, { backgroundColor: '#e05d5d' }]} onPress={swipeLeft}>
               <Text style={styles.buttonText}>Wrong</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.nextButton, { backgroundColor: '#4CAF50' }]} onPress={handleCorrect}>
+            <TouchableOpacity style={[styles.nextButton, { backgroundColor: '#4CAF50' }]} onPress={swipeRight}>
               <Text style={styles.buttonText}>Correct</Text>
             </TouchableOpacity>
           </View>
