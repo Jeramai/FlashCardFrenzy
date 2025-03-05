@@ -154,9 +154,11 @@ const styles = StyleSheet.create({
   },
   bigCardContainer: {
     position: 'relative',
-    height: '60%',
+    height: '100%',
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexGrow: 1,
+    flex: 1
   },
   bigCardLeft: {
     position: 'absolute',
