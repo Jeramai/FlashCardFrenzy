@@ -48,6 +48,7 @@ export default function CardGroupEdit() {
   const currentCard = useMemo(() => availableCards[currentCardIndex], [availableCards, currentCardIndex]);
 
   const flipCard = () => {
+    console.log('ahihi');
     setShowSide((side) => (side === 'front' ? 'back' : 'front'));
   };
   const handleWrong = () => {
@@ -111,8 +112,8 @@ export default function CardGroupEdit() {
 
         <View style={{ display: 'flex', justifyContent: 'space-around', flex: 1, gap: 20 }}>
           <View style={styles.bigCardContainer}>
-            {remainingCards > 1 && <GameCard animated={false} style={styles.bigCardLeft} />}
-            {remainingCards > 2 && <GameCard animated={false} style={styles.bigCardRight} />}
+            {remainingCards > 1 && <GameCard animated={false} style={styles.bigCardRight} />}
+            {remainingCards > 2 && <GameCard animated={false} style={styles.bigCardLeft} />}
             <GameCard
               currentCard={currentCard}
               showSide={showSide}
@@ -163,12 +164,16 @@ const styles = StyleSheet.create({
   bigCardLeft: {
     position: 'absolute',
     transform: 'rotate(3deg)',
-    width: '100%'
+    width: '100%',
+    backgroundColor: '#f5f5f5',
+    boxShadow: '0 0 10px 3px hsla(82, 12%, 65%, 0.2)'
   },
   bigCardRight: {
     position: 'absolute',
     transform: 'rotate(-3deg)',
-    width: '100%'
+    width: '100%',
+    backgroundColor: '#f0f0f0',
+    boxShadow: '0 0 10px 3px hsla(82, 12%, 65%, 0.3)'
   },
   buttons: {
     justifyContent: 'space-between',
